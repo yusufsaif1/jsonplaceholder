@@ -33,6 +33,8 @@
                         </button>
                     </x-slot>
 
+                  
+
                     <x-slot name="content">
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -44,7 +46,9 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                    <p style="margin-left: 1rem"> <a href="token">Api</a> </p>
                     </x-slot>
+                   
                 </x-dropdown>
             </div>
 

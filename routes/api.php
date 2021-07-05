@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,9 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+    Route::middleware('auth:api')->prefix('v1')->group(function () {
+        Route::get('apifetch', function (Request $req) {
+            return $req->user();
+        });
+        
+    });
+    
 
 Route::apiResource('/data', DataController::class);
 Route::apiResource('/comment', CommentController::class);
+Route::post('/oauth/token', [TokenController::class, 'index']);
