@@ -54,10 +54,12 @@ class LoginRequest extends FormRequest
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
-            // event(new Registered($user));
-
         }
-
+        $data = Auth::user();
+        $email = $data->email;
+        $user = User::where("email", $email)->first();
+        $token = $user->createToken('api token secret')->accessToken;
+        session(['key' => $token]);
         RateLimiter::clear($this->throttleKey());
     }
 

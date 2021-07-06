@@ -23,10 +23,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('token', function () {
-    $api_token = session('token');
-
-
-    return view('token', ["token" => $api_token]);
+    $api_token1 = session('token');
+    $api_token2 = session('key');
+    return view('token')->with('token', $api_token1)->with('token', $api_token2);
 });
 
 
